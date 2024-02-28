@@ -1,7 +1,16 @@
 # Linux-compilation
-Some configs &amp; cheetsheets for Linux overall
+Some configs for Linux
 
-## Installing zsh & p10k
+- Distro: Xubuntu 22.04
+- DE: xfce4
+- TE: xfce4-terminal
+- Panel: xfce4-panel
+- Shell: zsh + ohmyzsh + powerlevel10k
+- Theme: [Dracula](https://draculatheme.com/gtk)
+- Font: [JetBrains Mono](https://www.nerdfonts.com/font-downloads)
+- Icons: Papirus icons
+
+## Terminal
 Setup zsh:
 ```bash
 sudo apt install zsh git
@@ -21,6 +30,19 @@ git clone https://github.com/agkozak/zsh-z ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/pl
 ```
 Then copy dotfiles from repo to homedir
 
+## Appearence
+### Font
+Install from overview and put it `/usr/share/fonts/ttf`
+
+### Theme
+Install from overview and put it `/usr/share/themes`
+
+### Icons
+```bash
+sudo add-apt-repository ppa:papirus/papirus
+sudo apt-get install papirus-icon-theme
+```
+
 ## Useful utils
 ```bash
 sudo snap install code firefox telegram-desktop
@@ -29,7 +51,8 @@ sudo snap install code firefox telegram-desktop
 ```bash
 sudo apt install exa bat fd-find rar p7zip-full bzip2 grc most tree htop ranger build-essential openvpn
 sudo apt install transmission mpv gparted baobab qt5ct flameshot
-sudo apt install xfce4-genmon-plugin thunar-font-manager mugshot
+sudo add-apt-repository ppa:xubuntu-dev/extras
+sudo apt install xfce4-genmon-plugin xfce4-docklike-plugin thunar-font-manager mugshot
 ```
 Make symlinks for some bad-name packages:
 ```bash
@@ -37,6 +60,7 @@ mkdir -p ~/.local/bin
 ln -s $(which batcat) ~/.local/bin/bat
 ln -s $(which fdfind) ~/.local/bin/fd
 ```
-## Setup grub
+
+## Setup Grub
 Copy `grub/grub` to `/etc/default/grub` (be careful and check params)
 Copy `grub/themes/` to `/boot/grub/`
