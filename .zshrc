@@ -1,11 +1,3 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
-
 # Set the GPG_TTY to be the same as the TTY, either via the env var
 # or via the tty command.
 if [ -n "$TTY" ]; then
@@ -14,25 +6,21 @@ else
   export GPG_TTY="$TTY"
 fi
 
-
 autoload -Uz compinit && compinit
 
 # If you come from bash you might have to change your $PATH.
-# export GOROOT=$HOME/go
 export GOPATH=$HOME/go
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+#export PATH=$PATH:$GOPATH/bin
 
-#export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
-export PATH=$PATH:$GOPATH/bin
-export PATH="/home/vctrius/.local/bin:$PATH"
-export PATH=$HOME/bin:/usr/local/bin:/usr/local/go/bin:$PATH
+export PATH=$PATH:/home/vctrius/.local/bin:$PATH
+export PATH=$PATH:/usr/local/bin:/usr/local/go/bin
+#export PATH="$PATH:/opt/nvim-linux64/bin"
+#export PATH=$PATH:$HOME/yandex-cloud/bin
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
-
-ZSH_THEME="powerlevel10k/powerlevel10k"
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+ZSH_THEME="vctriusss-theme"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -43,11 +31,11 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Uncomment one of the following lines to change the auto-update behavior
 # zstyle ':omz:update' mode disabled  # disable automatic updates
-# zstyle ':omz:update' mode auto      # update automatically without asking
+zstyle ':omz:update' mode auto      # update automatically without asking
 # zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 
 # Uncomment the following line to change how often to auto-update (in days).
-# zstyle ':omz:update' frequency 13
+zstyle ':omz:update' frequency 13
 
 # Uncomment the following line if pasting URLs and other text is messed up.
 # DISABLE_MAGIC_FUNCTIONS="true"
@@ -83,19 +71,21 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-# Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-syntax-highlighting zsh-autosuggestions z)
+plugins=(
+#	git
+	zsh-syntax-highlighting
+	zsh-autosuggestions
+	z
+)
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
-
+export PAGER="most"
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
@@ -106,17 +96,8 @@ source $ZSH/oh-my-zsh.sh
 #   export EDITOR='mvim'
 # fi
 
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
 
 # Custom funcs and aliases
-
 # Some coloured commands
 if [ -f /usr/bin/grc ]; then
  alias gcc="grc --colour=auto gcc"
@@ -130,7 +111,7 @@ fi
 
 # Archives
 # Extract
-ex () {
+function ex () {
  if [ -f $1 ] ; then
    case $1 in
      *.tar.bz2) tar xvjf $1   ;;
@@ -153,7 +134,7 @@ ex () {
 }
 
 # Pack
-pk () {
+function pk () {
   if [ $1 ] ; then
     case $1 in
       tbz)       tar cjvf $2.tar.bz2 $2      ;;
@@ -170,9 +151,13 @@ pk () {
   fi
 }
 
-mkcd() {
+function mkcd() {
   mkdir -p -- "$1" &&
   cd -P -- "$1"
+}
+
+function xml2yaml() {
+  cat $1 | yq -p=xml -o=yaml
 }
 
 # Colourful ls
@@ -188,9 +173,7 @@ alias open='xdg-open'
 alias update='sudo apt update'
 alias upgrade='sudo apt upgrade'
 alias files='xdg-open .'
-alias youtube='yt-dlp -o "%(title)s.%(ext)s"'
 alias lst='ls -a --sort newest | tail -n 1'
-
-export PAGER="most"
-
-
+alias snapclear='sudo $HOME/snap_clear.sh'
+alias tmp='code /var/tmp/Code'
+alias clip='xclip -sel clip'

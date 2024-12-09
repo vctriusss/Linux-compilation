@@ -1,0 +1,46 @@
+# zathurarc
+
+# colors
+set statusbar-bg "#00FF00"
+set statusbar-fg red
+
+# settings
+#set window-height 1024
+#set window-width 768
+set adjust-open width
+set guioptions none
+set selection-notification false
+set selection-clipboard clipboard
+
+#set adjust-open "best-fit"
+set pages-per-row 1
+
+set scroll-page-aware "true"
+set smooth-scroll "true"
+set scroll-full-overlap 0.01
+set scroll-step 100
+
+
+# use sqlite as bookmarks database backend
+set database sqlite
+
+# key bindings
+map <PageUp> navigate previous
+map <PageDown> navigate next
+
+map + zoom in
+map - zoom out
+
+map q quit
+unmap <Right>
+unmap <Left>
+map <Right> navigate next
+map <Left> navigate previous
+map [fullscreen] <Right> navigate next
+map [fullscreen] <Left> navigate previous
+
+set render-loading "false"
+set scroll-step 50
+unmap f
+map f toggle_fullscreen
+map [fullscreen] f toggle_fullscreen

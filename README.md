@@ -50,9 +50,9 @@ sudo snap install code firefox telegram-desktop
 
 ```bash
 sudo apt install exa bat fd-find rar p7zip-full bzip2 grc most tree htop ranger build-essential openvpn
-sudo apt install transmission mpv gparted baobab qt5ct flameshot
+sudo apt install transmission mpv gparted baobab qt5ct flameshot zathura
 sudo add-apt-repository ppa:xubuntu-dev/extras
-sudo apt install xfce4-genmon-plugin xfce4-docklike-plugin thunar-font-manager mugshot
+sudo apt install xfce4-genmon-plugin xfce4-docklike-plugin xfce4-xkb-plugin thunar-font-manager mugshot
 ```
 Make symlinks for some bad-name packages:
 ```bash
@@ -61,6 +61,9 @@ ln -s $(which batcat) ~/.local/bin/bat
 ln -s $(which fdfind) ~/.local/bin/fd
 ```
 
+Copy `zathurarc` to `~/.config/zathura/zathura`
+
 ## Setup Grub
 Copy `grub/grub` to `/etc/default/grub` (be careful and check params)
+
 Copy `grub/themes/` to `/boot/grub/`
